@@ -323,9 +323,12 @@ Transport::handleConnectionQueue() {
 
 void
 Transport::handleIncoming(const std::shared_ptr<Connection>& connection) {
-    char buffer[Const::MaxBuffer];
-    memset(buffer, 0, sizeof buffer);
+//    char buffer[Const::MaxBuffer];
+//    memset(buffer, 0, sizeof buffer);
 
+    char* buffer = new char[Const::MaxBuffer];
+    memset(buffer, 0, sizeof (char)*Const::MaxBuffer);
+    
     ssize_t totalBytes = 0;
     for (;;) {
 
@@ -361,6 +364,8 @@ Transport::handleIncoming(const std::shared_ptr<Connection>& connection) {
             }
         }
     }
+    
+    delete[] buffer;
 }
 
 void
