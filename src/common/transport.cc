@@ -154,11 +154,7 @@ Transport::handleIncoming(const std::shared_ptr<Peer>& peer)
         }
 
         else {
-            totalBytes += bytes;
-            if (totalBytes >= Const::MaxBuffer) {
-                std::cerr << "Too long packet" << std::endl;
-                break;
-            }
+            handler_->onInput(buffer, bytes, peer);
         }
     }
     
